@@ -21,14 +21,13 @@
     [self presentViewController:sheet animated:YES completion:^{
         
     }];
+   
     
-    参数说明：
+   3、 参数说明：
     initStyle：UIAlertControllerStyleAlert和UIAlertControllerStyleActionSheet，这两种弹出方式
     andTitle:标题可以为空，可以传nil
     andContent:内容可以为空，sheet类型可以不传
-    andConfirm:^(id confirmBlock)：alert类型，对    
-点击确定    
-回调，sheet类型：不用传，传nil就行
+    andConfirm:^(id confirmBlock)：alert类型，对点击确定    回调，sheet类型：不用传，传nil就行
     andConfirmTitle：alert类型，按钮确定的名字，不传默认为确定，sheet传nil
     andCancelBlock:^(id cacel):alert和sheet都是取消回调
     andCancelTitle：alert和sheet，按钮取消的名字，不传默认为取消,
