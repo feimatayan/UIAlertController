@@ -30,8 +30,8 @@
         confirmTitle = @"确定";
     }
     self  = [AlertControllerView alertControllerWithTitle:title message:content preferredStyle:actionStyle];
-    typeof(self) weakSelf = self;
     if (actionStyle == UIAlertControllerStyleAlert) {//弹出
+            __weak typeof (self) weakSelf = self;
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (weakSelf.confirmBlock) {
                 weakSelf.confirmBlock(@"ok");
@@ -43,15 +43,17 @@
         self.clickIndexBlock = clickIndexBlock;
         [sheetArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             //数组arr里边默认是字符串
+                __weak typeof (self) weakSelf = self;
             UIAlertAction *tempAction = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (self.clickIndexBlock) {
-                    self.clickIndexBlock(@(idx));
+                if (weakSelf.clickIndexBlock) {
+                    weakSelf.clickIndexBlock(@(idx));
                 }
             }];
             if (idx == index) {//不想传这个值，直接数组的count即可
+                __weak typeof (self) weakSelf = self;
                 tempAction =  [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    if (self.clickIndexBlock) {
-                        self.clickIndexBlock(@(idx));
+                    if (weakSelf.clickIndexBlock) {
+                        weakSelf.clickIndexBlock(@(idx));
                     }
                 }];
 
@@ -61,6 +63,7 @@
         
         
     }
+     __weak typeof (self) weakSelf = self;
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         if (weakSelf.cancelBlock) {
             weakSelf.cancelBlock(@"cancell");
